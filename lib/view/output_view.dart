@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:listview_batch30/state/student_state.dart';
 import 'package:listview_batch30/widgets/custom_card.dart';
-
-import '../model/student.dart';
 
 class OutputView extends StatefulWidget {
   const OutputView({super.key});
@@ -11,13 +10,6 @@ class OutputView extends StatefulWidget {
 }
 
 class _OutputViewState extends State<OutputView> {
-  List<Student>? lstStudents;
-  @override
-  void didChangeDependencies() {
-    lstStudents = ModalRoute.of(context)!.settings.arguments as List<Student>?;
-    super.didChangeDependencies();
-  }
-
   void _showAlert(String msg, {int? index}) {
     showDialog(
       context: context,
@@ -29,7 +21,7 @@ class _OutputViewState extends State<OutputView> {
             TextButton(
               onPressed: () {
                 if (index != null) {
-                  lstStudents!.removeAt(index);
+                  StudentState.listSts.removeAt(index);
                   setState(() {});
                   Navigator.pop(context);
                 }
@@ -56,10 +48,10 @@ class _OutputViewState extends State<OutputView> {
         centerTitle: true,
       ),
       body: ListView.builder(
-        itemCount: lstStudents!.length,
+        itemCount: StudentState.listSts.length,
         itemBuilder: (context, index) {
           return KCard(
-            title: lstStudents![index].fname!,
+            title: StudentState.listSts[index].fname!,
             deleteFunction: () {
               _showAlert(
                 "Do you want to delete this student?",

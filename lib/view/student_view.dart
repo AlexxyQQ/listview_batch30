@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listview_batch30/state/student_state.dart';
 
 import '../model/student.dart';
 
@@ -17,8 +18,6 @@ class _StudentViewState extends State<StudentView> {
     "Bhaktapur",
     "Pokhara",
   ];
-
-  List<Student> lstStudent = [];
 
   // Controllers for TextFormFields
   final firstNameController = TextEditingController();
@@ -185,7 +184,7 @@ class _StudentViewState extends State<StudentView> {
                           city: selectedCity,
                           gender: gender,
                         );
-                        lstStudent.add(newSts);
+                        StudentState.listSts.add(newSts);
                         _showSnackbar("Student added successfully");
                         //Create a student object and add it to List of students
                       }
@@ -201,7 +200,6 @@ class _StudentViewState extends State<StudentView> {
                       Navigator.pushNamed(
                         context,
                         '/outputRoute',
-                        arguments: lstStudent,
                       );
                     },
                     child: const Text('View Students'),
